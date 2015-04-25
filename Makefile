@@ -43,7 +43,7 @@ build-reqs:
 
 test: build-reqs
 		touch conftest.py
-		$(PYTHON) setup.py test 
+		py.test test 
 		rm conftest.py
 
 egg: clean-build
