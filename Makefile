@@ -25,10 +25,10 @@ info:
 		@echo "- To test: make test   **unit(integration)test"
 
 start:
-		$(PYTHON) $(MOD_NAME).py
+		$(PYTHON) flask-me.py
 
 make-db:
-		$(PYTHON) -c 'from $(MOD_NAME) import init_db; init_db()' 
+		$(PYTHON) -c 'from flasking.db.database import init_db; init_db()' 
 
 install: build-reqs info
 		@echo "Python dependencies"
