@@ -13,17 +13,6 @@ clean-build:
 		rm -rf $(MOD_NAME)-$(VERSION_NUMBER)_* $(MOD_NAME).egg-info
 
 info:
-# f***ing makefile, I love u but u r bugging me too much
-# http://stackoverflow.com/questions/4483313/make-error-for-ifeq-syntax-error-near-unexpected-token
-ifeq ($(SUDO_USER), root)
-	@echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-	@echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-	@echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-	@echo "WARN: YOU ARE EXECUTING AS root, IT'S ADVISABLE TO RUN IT AS A NORMAL USER AND USE SUDO"
-	@echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-	@echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-	@echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-endif
 		@echo "****************************************************************"
 		@echo "To build this project you need these dependencies: $(PACKAGES)"
 		@echo "Check requirements.txt/setup.py file to see python dependencies."
@@ -34,6 +23,12 @@ endif
 		@echo "- To build the egg/wheel: make egg | make wheel"
 		@echo "- To launch: make [start|stop|debug]"
 		@echo "- To test: make test   **unit(integration)test"
+
+start:
+		$(PYTHON) $(MOD_NAME).py
+
+make-db:
+		$(PYTHON) -c 'from $(MOD_NAME) import init_db; init_db()' 
 
 install: build-reqs info
 		@echo "Python dependencies"
